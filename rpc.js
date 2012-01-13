@@ -844,7 +844,11 @@ rpc.ServiceProxy.prototype.__parseXMLRPC = function(valueEl){
 				case 'string':
 					if(!typeEL.firstChild)
 						return "";
-					return typeEL.firstChild.nodeValue;
+			                var rt = '';
+                                        for(var child, k=0; child = typeEL.childNodes.item(k); k++)
+                                            rt += child.nodeValue;
+                                        return rt;
+					//return typeEL.firstChild.nodeValue;
 				case 'datetime.iso8601':
 					var matches, date = new Date(0);
 					if(matches = typeEL.firstChild.nodeValue.match(/^(?:(\d\d\d\d)-(\d\d)(?:-(\d\d)(?:T(\d\d)(?::(\d\d)(?::(\d\d)(?:\.(\d+))?)?)?)?)?)$/)){
